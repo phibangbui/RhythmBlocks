@@ -7,12 +7,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
+import com.rhythmblocks.screen.MainMenuScreen;
+
 /**
  * Load up all resources necessary into this Game object
  * which then gets passed into each of the screen objects for use.
  */
 public class RhythmBlocks extends Game {
-	SpriteBatch batch;
+	public SpriteBatch batch;
 	public BitmapFont font;
 	
 	@Override
