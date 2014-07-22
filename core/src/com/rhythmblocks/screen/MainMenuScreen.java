@@ -20,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import com.rhythmblocks.ui.MainMenuSkin;
 import com.rhythmblocks.game.RhythmBlocks;
 
 /**
@@ -45,7 +44,7 @@ public class MainMenuScreen implements Screen{
         // Initialize 
         batch = new SpriteBatch();
         stage = new Stage();
-        skin = new MainMenuSkin();
+        skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
         Gdx.input.setInputProcessor(stage);
 
         // add table to stage
