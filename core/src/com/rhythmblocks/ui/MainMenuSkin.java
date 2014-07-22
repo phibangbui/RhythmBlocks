@@ -13,9 +13,9 @@ public class MainMenuSkin extends Skin {
 
 
 	public MainMenuSkin(){
-		super();
+	super();
 
-		Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
+	Pixmap pixmap = new Pixmap(1, 1, Format.RGBA8888);
         pixmap.setColor(Color.WHITE);
         pixmap.fill();
 
