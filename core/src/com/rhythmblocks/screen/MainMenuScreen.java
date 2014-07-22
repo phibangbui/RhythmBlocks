@@ -44,6 +44,7 @@ public class MainMenuScreen implements Screen{
         // Initialize 
         batch = new SpriteBatch();
         stage = new Stage();
+        // Load up a new skin defined in assets/ui/uiskin.json
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
         Gdx.input.setInputProcessor(stage);
 
@@ -56,11 +57,11 @@ public class MainMenuScreen implements Screen{
         start_button = new TextButton("Start", skin);
         options_button = new TextButton("Options", skin);
         credits_button = new TextButton("Credits", skin);
-        table.add(start_button);
+        table.add(start_button).width(300).height(30);
         table.row();    // start a new row
-        table.add(options_button);
-        table.row();    // start a new row
-        table.add(credits_button);
+        table.add(options_button).width(300).height(30);
+        table.row();    
+        table.add(credits_button).width(300).height(30);
         table.drawDebug(stage);
         
 
