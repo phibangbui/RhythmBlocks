@@ -83,7 +83,9 @@ public class MainMenuScreen implements Screen{
         // Set the time for each refresh
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         // Draw each element in stage
+        game.batch.begin();
         stage.draw();
+        game.batch.end();
 
         if(start_button.getClickListener().isPressed()){
             game.setScreen(new SongScreen(game));

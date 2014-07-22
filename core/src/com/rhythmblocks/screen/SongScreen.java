@@ -3,11 +3,27 @@ package com.rhythmblocks.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+
 
 import com.rhythmblocks.game.RhythmBlocks;
 
@@ -17,13 +33,46 @@ import com.rhythmblocks.game.RhythmBlocks;
  */
 public class SongScreen implements Screen {
 	final RhythmBlocks game;
-
 	OrthographicCamera camera;
 
+	Stage stage;
+	SpriteBatch batch;
+	Skin skin;
+
+	VerticalGroup songs_list;
 
 	
 	public SongScreen(final RhythmBlocks game) {
 		this.game = game;
+
+		// Initialize 
+        batch = new SpriteBatch();
+        stage = new Stage();
+        // Load up a new skin defined in assets/ui/uiskin.json
+        skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+        Gdx.input.setInputProcessor(stage);
+
+        Table table = new Table();
+        table.setFillParent(true);
+        stage.addActor(table);
+
+        songs_list = new VerticalGroup();
+        // List all the direct children files/directories of songs
+        FileHandle[] files = Gdx.files.internal("songs/").list();
+        for(FileHandle file:files){
+        	final TextButton button = new TextButton(file.name(), skin);
+        	button.addListener(new ChangeListener(){
+        		public void changed(ChangeEvent event, Actor actor){
+        			game.setScreen(new GameScreen(game, button.getText().toString()));
+        			dispose();
+        		}
+        	});
+        	songs_list.addActor(button);
+        }
+
+		table.add(new ScrollPane(songs_list));
+
+
 		camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
 	}
@@ -40,21 +89,16 @@ public class SongScreen implements Screen {
 
 	@Override
 	public void render (float delta) {
-		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+		//Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         game.batch.begin();
-        game.font.draw(game.batch, "Song screen", 100, 150);
-        game.font.draw(game.batch, "Tap to move to the Game screen", 100, 100);
+        stage.draw();
         game.batch.end();
-
-        if (Gdx.input.isTouched()) {
-            game.setScreen(new GameScreen(game));
-            dispose();
-        }
 	}
 
 	/*

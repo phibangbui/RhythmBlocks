@@ -17,13 +17,15 @@ import com.rhythmblocks.game.RhythmBlocks;
  */
 public class GameScreen implements Screen {
 	final RhythmBlocks game;
+	final String song;
 
 	OrthographicCamera camera;
 
 
 	
-	public GameScreen(final RhythmBlocks game) {
+	public GameScreen(final RhythmBlocks game, String song) {
 		this.game = game;
+		this.song = song;
 		camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
 	}
@@ -40,15 +42,15 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render (float delta) {
-		Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+		//Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.font.draw(game.batch, "Game Screen", 100, 150);
-        game.font.draw(game.batch, "Tap to move to stats screen!", 100, 100);
+        game.font.draw(game.batch, "Game Screen", 20, 20);
+        game.font.draw(game.batch, "Song Chosen: " + song, 100, 100);
         game.batch.end();
 
         if (Gdx.input.isTouched()) {
