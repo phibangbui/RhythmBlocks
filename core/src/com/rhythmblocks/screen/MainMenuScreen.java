@@ -24,6 +24,7 @@ public class MainMenuScreen implements Screen{
     Stage stage;
     SpriteBatch batch;
     Skin skin;
+    Music bg_music;
     
     TextButton start_button;
     TextButton options_button;
@@ -57,7 +58,7 @@ public class MainMenuScreen implements Screen{
         table.drawDebug(stage);
 
         // Initialize music
-        Music bg_music = Gdx.audio.newMusic(Gdx.files.internal("ui/rhythmblocksbg.mp3"));
+        bg_music = Gdx.audio.newMusic(Gdx.files.internal("ui/rhythmblocksbg.mp3"));
         bg_music.play();
         bg_music.setVolume(0.5f);
         bg_music.setLooping(true);
@@ -101,6 +102,7 @@ public class MainMenuScreen implements Screen{
         //
         stage.dispose();
         skin.dispose();
+        bg_music.dispose();
         //
     }
 
