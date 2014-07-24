@@ -60,7 +60,7 @@ public class MainMenuScreen implements Screen{
         Music bg_music = Gdx.audio.newMusic(Gdx.files.internal("ui/rhythmblocksbg.mp3"));
         bg_music.play();
         bg_music.setVolume(0.5f);
-        bg_music.isLooping();
+        bg_music.setLooping(true);
 
         // Set Camera
         camera = new OrthographicCamera();
@@ -85,7 +85,7 @@ public class MainMenuScreen implements Screen{
         stage.draw();
         game.batch.end();
 
-        if(start_button.getClickListener().isPressed()){
+        if(start_button.getClickListener().isPressed()) {
             game.setScreen(new SongScreen(game));
             dispose();   
         }else if(options_button.getClickListener().isPressed()){
@@ -97,7 +97,7 @@ public class MainMenuScreen implements Screen{
     }
 
     @Override
-    public void dispose(){
+    public void dispose() {
         //
         stage.dispose();
         skin.dispose();
@@ -105,27 +105,27 @@ public class MainMenuScreen implements Screen{
     }
 
     @Override
-    public void resume(){
+    public void resume() {
 
     }
 
     @Override
-    public void pause(){
+    public void pause() {
 
     }
 
     @Override
-    public void hide(){
+    public void hide() {
 
     }
 
     @Override
-    public void show(){
+    public void show() {
 
     }
 
     @Override
-    public void resize(int width, int height){
+    public void resize(int width, int height) {
         //
     	stage.getViewport().update(width, height, true);
         //

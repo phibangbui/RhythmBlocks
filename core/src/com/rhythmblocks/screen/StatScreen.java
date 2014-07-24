@@ -28,7 +28,7 @@ public class StatScreen implements Screen {
         The parameters are the new width and height the screen has been resized to in pixels. 
      */
 	@Override
-	public void resize(int width, int height){
+	public void resize(int width, int height) {
 
 	}
 
@@ -57,7 +57,7 @@ public class StatScreen implements Screen {
 		A good place to save the game state.
 	 */
 	@Override
-	public void pause(){
+	public void pause() {
 
 	}
 
@@ -65,7 +65,7 @@ public class StatScreen implements Screen {
 		This method is only called on Android, when the application resumes from a paused state. 
 	 */
 	@Override
-	public void resume(){
+	public void resume() {
 
 	}
 
@@ -73,7 +73,7 @@ public class StatScreen implements Screen {
 		Called when the application is destroyed. It is preceded by a call to pause().
 	 */
 	@Override
-	public void dispose(){
+	public void dispose() {
 
 	}
 
