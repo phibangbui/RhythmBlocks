@@ -4,21 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.audio.Music;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import com.rhythmblocks.game.RhythmBlocks;
 
@@ -63,8 +55,14 @@ public class MainMenuScreen implements Screen{
         table.row();    
         table.add(credits_button).width(300).height(30);
         table.drawDebug(stage);
-        
 
+        // Initialize music
+        Music bg_music = Gdx.audio.newMusic(Gdx.files.internal("ui/rhythmblocksbg.mp3"));
+        bg_music.play();
+        bg_music.setVolume(0.5f);
+        bg_music.isLooping();
+
+        // Set Camera
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
 
@@ -95,6 +93,7 @@ public class MainMenuScreen implements Screen{
         }else if(credits_button.getClickListener().isPressed()){
 
         }
+
     }
 
     @Override
