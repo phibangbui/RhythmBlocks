@@ -1,3 +1,10 @@
+Meta Data - 
+	Song Name
+	Song Length
+	First beat start time
+	BPM
+	
+
 Combo:
 	a line of numbers from 0-9 indicating which note should be hit (1-9 <- top left to bottom right). 0 for no notes (used only to indicate higher note rate). 
 X-Block:
