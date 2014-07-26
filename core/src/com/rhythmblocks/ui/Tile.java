@@ -35,9 +35,7 @@ public class Tile extends Image{
 		// Initialize textures
 		regular_texture = new Texture(Gdx.files.internal("ui/tile_up.png"));
 		pressed_texture = new Texture(Gdx.files.internal("ui/tile_down.png"));
-		// Set the dimensions of this actor
-		//setWidth(SIZE);
-		//setHeight(SIZE);
+
 		// Initialize texture image as regular_texture
 		region = new TextureRegion(regular_texture, SIZE, SIZE);
 		setDrawable(new TextureRegionDrawable(region));
@@ -51,6 +49,7 @@ public class Tile extends Image{
 	 */
 	@Override
 	public void act(float delta){
+		// TODO
 		if(cl.isPressed()){
 			region.setRegion(pressed_texture);
 		}else{
