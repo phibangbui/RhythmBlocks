@@ -19,7 +19,7 @@ public class StatScreen implements Screen {
 	public StatScreen(final RhythmBlocks game) {
 		this.game = game;
 		camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
+        camera.setToOrtho(false, game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 	}
 
 	/* 

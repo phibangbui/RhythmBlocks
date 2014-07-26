@@ -66,7 +66,7 @@ public class SongScreen implements Screen {
 
 
 		camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
+        camera.setToOrtho(false, game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 	}
 
 	/* 

@@ -5,25 +5,44 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
-import com.rhythmblocks.game.RhythmBlocks;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import com.rhythmblocks.game.RhythmBlocks;
+import com.rhythmblocks.ui.Tile;
+
+import java.lang.Math;
 
 /**
  * Game Screen, when game is finished, will move to stats screen
  */
 public class GameScreen implements Screen {
+	final int NUM_TILES = 9;
 	final RhythmBlocks game;
 	final String song;
 
 	OrthographicCamera camera;
 
+	Stage stage;
+	SpriteBatch batch;
+	Skin skin;
 
+	Tile[] tiles = new Tile[NUM_TILES];
 	
 	public GameScreen(final RhythmBlocks game, String song) {
 		this.game = game;
 		this.song = song;
+
+		batch = new SpriteBatch();
+		stage = new Stage();
+		skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
+		Gdx.input.setInputProcessor(stage);
+
+		initTiles();
+
 		camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
+        camera.setToOrtho(false, game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 	}
 
 	/* 
@@ -44,14 +63,17 @@ public class GameScreen implements Screen {
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
         game.batch.begin();
-        game.font.draw(game.batch, "Game Screen", 20, 20);
+        stage.draw();
         game.font.draw(game.batch, "Song Chosen: " + song, 100, 100);
         game.batch.end();
 
-        if (Gdx.input.isTouched()) {
-            game.setScreen(new StatScreen(game));
-            dispose();
+        if(Gdx.input.isTouched()){
+        	if(Gdx.input.getY() <= Tile.SIZE){
+        		game.setScreen(new StatScreen(game));
+        		dispose();
+        	}
         }
 	}
 
@@ -91,6 +113,22 @@ public class GameScreen implements Screen {
 
     @Override
     public void hide() {
+
+    }
+
+    /**
+     * Initialize the tiles with the proper coordinates and add to stage.
+     * Tiles are spaced evenly starting from the bottom of the screen.
+     */
+    private void initTiles(){
+    	int rows = (int) Math.sqrt(NUM_TILES);
+    	int tile_count = 0;
+    	for(int i = 0; i < rows; i++){
+    		for(int j = 0; j < rows; j++){
+    			tiles[tile_count] = new Tile(i * Tile.SIZE, j * Tile.SIZE);
+    			stage.addActor(tiles[tile_count++]);
+    		}
+    	}
     }
 
 
