@@ -28,7 +28,6 @@ public class SongScreen implements Screen {
 	OrthographicCamera camera;
 
 	Stage stage;
-	SpriteBatch batch;
 	Skin skin;
 
 	VerticalGroup songs_list;
@@ -38,7 +37,6 @@ public class SongScreen implements Screen {
 		this.game = game;
 
 		// Initialize 
-        batch = new SpriteBatch();
         stage = new Stage();
         // Load up a new skin defined in assets/ui/uiskin.json
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));

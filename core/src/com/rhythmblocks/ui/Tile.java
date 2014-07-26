@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 
 /**
- * Tile for game screen
+ * Tile widget that extends the Image widget.
  */
 public class Tile extends Image{
 	public final static int SIZE = RhythmBlocks.SCREEN_WIDTH / 3;
@@ -30,15 +30,14 @@ public class Tile extends Image{
 	/**
 	 * Create a new Tile actor with origin x and y.
 	 */
-	public Tile(float x, float y){
-		// Set the absolute position of this actor on the screen.
-		setPosition(x, y);
+	public Tile(){
+		super();
 		// Initialize textures
 		regular_texture = new Texture(Gdx.files.internal("ui/tile_up.png"));
 		pressed_texture = new Texture(Gdx.files.internal("ui/tile_down.png"));
 		// Set the dimensions of this actor
-		setWidth(SIZE);
-		setHeight(SIZE);
+		//setWidth(SIZE);
+		//setHeight(SIZE);
 		// Initialize texture image as regular_texture
 		region = new TextureRegion(regular_texture, SIZE, SIZE);
 		setDrawable(new TextureRegionDrawable(region));
