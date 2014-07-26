@@ -1,0 +1,59 @@
+Combo:
+	a line of numbers from 0-9 indicating which note should be hit (1-9 <- top left to bottom right). 0 for no notes (used only to indicate higher note rate). 
+X-Block:
+	a comma separated block of combos with X-combos on new lines.
+	X is a base 2 number.
+	Blocks represent the timing and notes to be hit every in an interval of 4 beats.
+	1-Block  <- a note to be hit only on the first beat of the 4 beat interval
+	2-Block  <- a note to be hit on the 1st and 3rd beat of the 4 beat interval
+	4-Block  <- a note to be hit on each beat of the 4 beat interval
+	8-Block  <- a note to be hit on and inbetween each beat of the 4 beat interval
+	16-Block <- you get the gist.
+
+	Eg.
+	Song with 12 beats and the middle note to be hit every 4th beat.
+	1  2  3  4  5  6  7  8  9  10  11  12
+	5           5           5             
+
+	5
+	,
+	5
+	,
+	5
+	,
+
+	Eg.
+	Song with 12 beats and the middle note to be hit every 4th beat.
+	1  2  3  4  5  6  7  8  9  10  11  12
+	5     5     5     5     5      5     
+
+	5
+	5
+	,
+	5
+	5
+	,
+	5
+	5
+	,
+
+	*** If you want to place a note not on every 4th beat starting from the first, but starting on the third, you'd have to split it to a 4-block like so:
+	1  2  3  4  5  6  7  8  9  10  11  12
+	   5     5     5     5     5       5   
+
+	0
+	5
+	0
+	5
+	,
+	0
+	5
+	0
+	5
+	,
+	0
+	5
+	0
+	5
+	,
+
