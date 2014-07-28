@@ -14,6 +14,8 @@ import com.rhythmblocks.game.RhythmBlocks;
 import com.rhythmblocks.ui.Tile;
 import com.rhythmblocks.ui.TileBoard;
 
+import com.badlogic.gdx.audio.Music;
+
 import java.lang.Math;
 
 /**
@@ -28,6 +30,8 @@ public class GameScreen implements Screen {
 
 	Stage stage;
 	Skin skin;
+
+	Music music;
 
 	Table rootTable;
 	Table dashTable ;
@@ -53,9 +57,17 @@ public class GameScreen implements Screen {
 		rootTable.add(boardTable).bottom();
 		rootTable.setFillParent(true);
 		stage.addActor(rootTable);
+
+		startSong();
 		
 		camera = new OrthographicCamera();
         camera.setToOrtho(false, game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
+	}
+
+	private void startSong(){
+		music = Gdx.audio.newMusic(Gdx.files.internal("songs/" + song + "/" + song + ".mp3"));
+		music.play();
+        music.setVolume(0.5f);
 	}
 
 	/* 
@@ -130,6 +142,7 @@ public class GameScreen implements Screen {
     public void hide() {
     	Gdx.input.setInputProcessor(stage);
     }
+
 
 
 }
