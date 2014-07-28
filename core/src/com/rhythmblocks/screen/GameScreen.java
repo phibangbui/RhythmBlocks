@@ -39,11 +39,14 @@ public class GameScreen implements Screen {
 
 		stage = new Stage();
 		skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
-		Gdx.input.setInputProcessor(stage);
+
 
 		rootTable = new Table();
 		dashTable = new Table();
 		boardTable = new TileBoard((int) Math.sqrt(NUM_TILES));
+
+		stage.setKeyboardFocus(boardTable);
+		Gdx.input.setInputProcessor(stage);
 
 		rootTable.add(dashTable).expand();
 		rootTable.row();
@@ -82,7 +85,7 @@ public class GameScreen implements Screen {
 
         if(Gdx.input.isTouched()){
         	// Clicked outside of board
-        	if(Gdx.input.getY() <= (800 - Tile.SIZE){
+        	if(Gdx.input.getY() <= (Tile.SIZE)){
         		game.setScreen(new StatScreen(game));
         		dispose();
         	}
@@ -120,12 +123,12 @@ public class GameScreen implements Screen {
 	 */
 	@Override
     public void show() {
-
+    	Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void hide() {
-
+    	Gdx.input.setInputProcessor(stage);
     }
 
 

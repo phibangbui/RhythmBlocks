@@ -15,23 +15,25 @@ import com.rhythmblocks.game.RhythmBlocks;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 /**
  * Tile widget that extends the Image widget.
  */
 public class Tile extends Image{
 	public final static int SIZE = RhythmBlocks.SCREEN_WIDTH / 3;
+	final int TILE_NUMBER;	// tile number from 1 - 9 (1 2 3, 4 5 6, 7 8 9)
+
 	final Texture regular_texture;
 	final Texture pressed_texture;
 	
 	TextureRegion region;
-	ClickListener cl;
 
 	/**
-	 * Create a new Tile actor with origin x and y.
+	 * Create a new Tile actor.
 	 */
-	public Tile(){
-		super();
+	public Tile(int number){
+		TILE_NUMBER = number;
 		// Initialize textures
 		regular_texture = new Texture(Gdx.files.internal("ui/tile_up.png"));
 		pressed_texture = new Texture(Gdx.files.internal("ui/tile_down.png"));
@@ -40,21 +42,38 @@ public class Tile extends Image{
 		region = new TextureRegion(regular_texture, SIZE, SIZE);
 		setDrawable(new TextureRegionDrawable(region));
 
-		cl = new ClickListener();
-		addListener(cl);
+		setInputListener();
 	}
 
 	/**
-	 * Things to do if this Tile is clicked.
+	 * Things to the Tile should do based on time.
 	 */
 	@Override
 	public void act(float delta){
 		// TODO
-		if(cl.isPressed()){
-			region.setRegion(pressed_texture);
-		}else{
-			region.setRegion(regular_texture);
-		}
+	}
+
+	private void setInputListener(){
+		this.addListener(new InputListener(){
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+				tilePressed();
+				return true;
+			}
+			@Override
+			public void touchUp(InputEvent event, float x, float y, int pointer, int button){
+				tileReleased();
+			}
+		});
+	}
+
+	/** STUFF TO DO WHEN THE TILE IS PRESSED */
+	protected void tilePressed(){
+		region.setRegion(pressed_texture);
+	}
+	/** STUFF TO DO WHEN THE TILE IS RELEASED */
+	protected void tileReleased(){
+		region.setRegion(regular_texture);
 	}
 	
 
